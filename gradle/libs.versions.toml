@@ -11,6 +11,7 @@ activity = "1.10.1"
 constraintlayout = "2.2.1"
 koinVersion = "3.4.0"
 securityCryptoVersion = "1.0.0"
+mockkVersion = "1.13.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -23,6 +24,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
 security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCryptoVersion" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

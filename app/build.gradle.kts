@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.security.crypto)
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
