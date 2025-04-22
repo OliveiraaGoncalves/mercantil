@@ -2,9 +2,12 @@ package br.com.mercantil.feature.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import br.com.mercantil.databinding.LoginActivityBinding
 import br.com.mercantil.feature.presentation.validation.ValidationActivity
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -21,9 +24,32 @@ class LoginActivity : AppCompatActivity() {
             val user = binding.editTextUsername.text.toString()
             val pass = binding.editTextPassword.text.toString()
 
-            val intent = Intent(this, ValidationActivity::class.java)
-            intent.putExtra(KEY_EXTRA_AUTH_MODEL, viewModel.encrypt(user, pass))
-            startActivity(intent)
+            viewModel.onLoginClick(user, pass)
+        }
+
+        observeViewState()
+    }
+
+    private fun observeViewState() {
+        lifecycleScope.launch {
+            viewModel.viewState.collect { state ->
+                when (state) {
+                    is LoginViewState.Idle -> Unit
+                    is LoginViewState.Success -> {
+                        val intent =
+                            Intent(this@LoginActivity, ValidationActivity::class.java).apply {
+                                putExtra(KEY_EXTRA_AUTH_MODEL, state.authModel)
+                            }
+                        startActivity(intent)
+                        viewModel.resetState()
+                    }
+
+                    is LoginViewState.Error -> {
+                        Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_SHORT).show()
+                        viewModel.resetState()
+                    }
+                }
+            }
         }
     }
 

@@ -11,10 +11,10 @@ import kotlinx.coroutines.launch
 
 class ValidationViewModel(
     private val useCase: AuthUseCase
-) : ViewModel()  {
+) : ViewModel() {
     private val _validationResult = MutableStateFlow<Boolean?>(null)
     val validationResult: StateFlow<Boolean?> = _validationResult
-    
+
     fun validateLogin(user: String, password: String) {
         viewModelScope.launch {
             delay(1500)

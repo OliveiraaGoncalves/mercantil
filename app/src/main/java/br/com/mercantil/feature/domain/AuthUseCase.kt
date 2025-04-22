@@ -19,7 +19,8 @@ class AuthUseCaseImpl(
 
     override fun isValidLogin(authModel: AuthModel): Boolean {
         val modelDecripted = decrypt(authModel)
-        val resultValidation = modelDecripted.user == repository.getUserLocal() && modelDecripted.password == repository.getPasswordLocal()
+        val resultValidation =
+            modelDecripted.user == repository.getUserLocal() && modelDecripted.password == repository.getPasswordLocal()
         if (resultValidation) {
             saveLog(modelDecripted)
         }

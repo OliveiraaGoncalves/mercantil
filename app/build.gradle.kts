@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.security.crypto)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
+    testImplementation(libs.coroutinesTest)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
